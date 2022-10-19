@@ -15,7 +15,7 @@ typedef struct {
 } NV_GPU_ARCH_INFO;
 
 typedef HMODULE(WINAPI* LoadLibraryExW_t)(LPCWSTR lpLibFileName, HANDLE hFile, DWORD dwFlags);
-typedef void*(WINAPI* nvapi_QueryInterface_t)(unsigned int function);
+typedef void* (WINAPI* nvapi_QueryInterface_t)(unsigned int function);
 typedef int(WINAPI* NvAPI_GPU_GetArchInfo_t)(int hPhysicalGpu, NV_GPU_ARCH_INFO* pGpuArchInfo);
 
 static LoadLibraryExW_t OriginalLoadLibraryExW = LoadLibraryExW;
@@ -36,9 +36,9 @@ void* DetourNvAPI_QueryInterface(unsigned int function) {
 	auto result = OriginalNvAPI_QueryInterface(function);
 	if (function == 0xD8265D24UL && !HookedGetArchInfo) {
 		HookedGetArchInfo = true;
-		
+
 		OriginalNvAPI_GPU_GetArchInfo = (NvAPI_GPU_GetArchInfo_t)result;
-		
+
 		DetourTransactionBegin();
 		DetourUpdateThread(GetCurrentThread());
 		DetourAttach(&(PVOID&)OriginalNvAPI_GPU_GetArchInfo, DetourNvAPI_GPU_GetArchInfo);
@@ -53,7 +53,7 @@ HMODULE WINAPI DetourLoadLibraryExW(LPCWSTR lpLibFileName, HANDLE hFile, DWORD d
 		if (!HookedNvAPI) {
 			HookedNvAPI = true;
 			OriginalNvAPI_QueryInterface = (nvapi_QueryInterface_t)GetProcAddress(result, "nvapi_QueryInterface");
-			
+
 			DetourTransactionBegin();
 			DetourUpdateThread(GetCurrentThread());
 			DetourAttach(&(PVOID&)OriginalNvAPI_QueryInterface, DetourNvAPI_QueryInterface);
@@ -67,8 +67,7 @@ void Core::Initialize(HINSTANCE hModule) {
 	// Get execution path
 	std::vector<char> pathBuf;
 	DWORD copied = 0;
-	do
-	{
+	do {
 		pathBuf.resize(pathBuf.size() + MAX_PATH);
 		copied = GetModuleFileNameA(nullptr, pathBuf.data(), static_cast<DWORD>(pathBuf.size()));
 	} while (copied >= pathBuf.size());
@@ -98,16 +97,14 @@ void Core::Initialize(HINSTANCE hModule) {
 
 	// Check if is compatible proxy
 	std::size_t index = -1;
-	if (!Exports::IsFileNameCompatible(ProxyFilename, &index))
-	{
+	if (!Exports::IsFileNameCompatible(ProxyFilename, &index)) {
 		Error(L"Proxy has an incompatible file name!\nValid names are: " + names + L"\n", true);
 		return;
 	}
 
 	// Load original libs
 	const HMODULE originalDll = LoadOriginalProxy(proxyFilepath, proxyFilepath.filename().stem().wstring());
-	if (!originalDll)
-	{
+	if (!originalDll) {
 		Error(L"Failed to Load original " + proxyFilepath.wstring() + L"!", true);
 		return;
 	}
@@ -120,7 +117,7 @@ void Core::Initialize(HINSTANCE hModule) {
 
 	// Do our detour code now
 	DetourRestoreAfterWith();
-	
+
 	DetourTransactionBegin();
 	DetourUpdateThread(GetCurrentThread());
 	DetourAttach(&(PVOID&)OriginalLoadLibraryExW, DetourLoadLibraryExW);
@@ -130,12 +127,10 @@ void Core::Initialize(HINSTANCE hModule) {
 HMODULE Core::LoadOriginalProxy(const std::filesystem::path& proxyFilepath, const std::wstring& proxyFilepathNoExt) {
 	HMODULE originalDll = LoadLibraryW((proxyFilepathNoExt + L"_original.dll").c_str());
 
-	if (!originalDll)
-	{
+	if (!originalDll) {
 		wchar_t system32_path[MAX_PATH];
 
-		if (GetSystemDirectoryW(system32_path, MAX_PATH) == NULL)
-		{
+		if (GetSystemDirectoryW(system32_path, MAX_PATH) == NULL) {
 			Error("Failed to get System32 directory!");
 			Core::KillProcess();
 			return nullptr;
@@ -159,8 +154,7 @@ void Core::Error(const std::string& reason, const bool shouldKill) {
 	if (shouldKill) Core::KillProcess();
 }
 
-void Core::Error(const std::wstring& reason, const bool shouldKill)
-{
+void Core::Error(const std::wstring& reason, const bool shouldKill) {
 	MessageBoxW(nullptr, (reason + L" " + (shouldKill ? L"Preventing Startup" : L"Continuing without ArchSpoofer") + L"...").c_str(), L"ArchSpoofer", MB_ICONERROR | MB_OK);
 	if (shouldKill) KillProcess();
 }
