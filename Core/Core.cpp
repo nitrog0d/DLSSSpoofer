@@ -88,7 +88,7 @@ int NvAPI_EnumPhysicalGPUs(int nvGPUHandle[64], unsigned long* pGpuCount) {
 
 int NvAPI_SYS_GetDriverAndBranchVersion(unsigned long* pDriverVersion, char szBuildBranchString[64]) {
 	OutputDebugStringA("[DLSSSpoofer] Called NvAPI_SYS_GetDriverAndBranchVersion");
-	*pDriverVersion = 51748;
+	*pDriverVersion = 52225;
 	return 0;
 }
 
@@ -163,6 +163,7 @@ FARPROC WINAPI DetourGetProcAddress(HMODULE hModule, LPCSTR lpProcName) {
 }
 
 void Core::Initialize(HINSTANCE hModule) {
+	OutputDebugStringA("[DLSSSpoofer] Initializing...");
 	// Get execution path
 	std::vector<char> pathBuf;
 	DWORD copied = 0;
