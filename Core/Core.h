@@ -5,6 +5,8 @@
 class Core {
 public:
 	static void Initialize(HINSTANCE hModule);
+	
+	static bool ConsolePrint(const char* fmt, ...);
 
 private:
 	static HMODULE LoadOriginalProxy(const std::filesystem::path& proxyFilepath, const std::wstring& proxyFilepathNoExt);
@@ -13,4 +15,6 @@ private:
 	static void Error(const std::string& reason, bool shouldKill = false);
 	static void Error(const std::wstring& reason, bool shouldKill = false);
 	static void KillProcess();
+
+	static void AttachConsole();
 };
