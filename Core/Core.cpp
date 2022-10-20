@@ -119,37 +119,37 @@ void* Fake_NvAPI_QueryInterface(unsigned long function) {
 		Core::ConsolePrint(std::string("[DLSSSpoofer] Handler for NvAPI_InitializeEx not implemented").c_str());
 		return (NvAPI_Success_t)NvAPI_Success;
 	case 0x33C7358CUL: // NvAPI_CallStart
-		Core::ConsolePrint(std::string("[DLSSSpoofer] Handler for NvAPI_CallStart implemented").c_str());
+		Core::ConsolePrint(std::string("[DLSSSpoofer] Handler for NvAPI_CallStart not implemented").c_str());
 		return (NvAPI_Success_t)NvAPI_Success;
 	case 0x593E8644UL: // NvAPI_CallReturn
-		Core::ConsolePrint(std::string("[DLSSSpoofer] Handler for NvAPI_CallReturn implemented").c_str());
+		Core::ConsolePrint(std::string("[DLSSSpoofer] Handler for NvAPI_CallReturn not implemented").c_str());
 		return (NvAPI_Success_t)NvAPI_Success;
 	case 0x26322BC3UL: // NvAPI_D3D12_QueryCpuVisibleVidmem
-		Core::ConsolePrint(std::string("[DLSSSpoofer] Handler for NvAPI_D3D12_QueryCpuVisibleVidmem implemented").c_str());
+		Core::ConsolePrint(std::string("[DLSSSpoofer] Handler for NvAPI_D3D12_QueryCpuVisibleVidmem not implemented").c_str());
 		return (NvAPI_Success_t)NvAPI_Success;
 	case 0xD7C61344UL: // ??? Inside NvAPI_Unload, might be NvApi_UnloadEx
 		Core::ConsolePrint(std::string("[DLSSSpoofer] Handler for NvApi_UnloadEx not implemented").c_str());
 		return (NvAPI_Success_t)NvAPI_Success;
 	case 0xD22BDD7EUL: // NvAPI_Unload
-		Core::ConsolePrint(std::string("[DLSSSpoofer] Handler for NvAPI_Unload implemented").c_str());
+		Core::ConsolePrint(std::string("[DLSSSpoofer] Handler for NvAPI_Unload not implemented").c_str());
 		return (NvAPI_Success_t)NvAPI_Success;
 	case 0xE9B009B9UL: // NvAPI_GPU_QueryNodeInfo, not present in nvapi header, probably a very recent and new API
-		Core::ConsolePrint(std::string("[DLSSSpoofer] Handler for NvAPI_GPU_QueryNodeInfo implemented").c_str());
+		Core::ConsolePrint(std::string("[DLSSSpoofer] Handler for NvAPI_GPU_QueryNodeInfo not implemented").c_str());
 		return (NvAPI_Success_t)NvAPI_Success;
 	case 0xAEF96CA1UL: // NvAPI_D3D_GetSleepStatus
-		Core::ConsolePrint(std::string("[DLSSSpoofer] Handler for NvAPI_D3D_GetSleepStatus implemented").c_str());
+		Core::ConsolePrint(std::string("[DLSSSpoofer] Handler for NvAPI_D3D_GetSleepStatus not implemented").c_str());
 		return (NvAPI_Success_t)NvAPI_Success;
 	case 0x1A587F9CUL: // NvAPI_D3D_GetLatency
-		Core::ConsolePrint(std::string("[DLSSSpoofer] Handler for NvAPI_D3D_GetLatency implemented").c_str());
+		Core::ConsolePrint(std::string("[DLSSSpoofer] Handler for NvAPI_D3D_GetLatency not implemented").c_str());
 		return (NvAPI_Success_t)NvAPI_Success;
 	case 0xAC1CA9E0UL: // NvAPI_D3D_SetSleepMode
-		Core::ConsolePrint(std::string("[DLSSSpoofer] Handler for NvAPI_D3D_SetSleepMode implemented").c_str());
+		Core::ConsolePrint(std::string("[DLSSSpoofer] Handler for NvAPI_D3D_SetSleepMode not implemented").c_str());
 		return (NvAPI_Success_t)NvAPI_Success;
 	case 0x852CD1D2UL: // NvAPI_D3D_Sleep
-		Core::ConsolePrint(std::string("[DLSSSpoofer] Handler for NvAPI_D3D_Sleep implemented").c_str());
+		Core::ConsolePrint(std::string("[DLSSSpoofer] Handler for NvAPI_D3D_Sleep not implemented").c_str());
 		return (NvAPI_Success_t)NvAPI_Success;
 	case 0xD9984C05UL: // NvAPI_D3D_SetLatencyMarker
-		Core::ConsolePrint(std::string("[DLSSSpoofer] Handler for NvAPI_D3D_SetLatencyMarker implemented").c_str());
+		Core::ConsolePrint(std::string("[DLSSSpoofer] Handler for NvAPI_D3D_SetLatencyMarker not implemented").c_str());
 		return (NvAPI_Success_t)NvAPI_Success;
 	default: // ?
 		Core::ConsolePrint(std::string("[DLSSSpoofer] Handler for 0x" + std::format("{:X}", function) + " not found").c_str());
