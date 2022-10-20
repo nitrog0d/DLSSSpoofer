@@ -70,9 +70,9 @@ BEGIN
             VALUE "CompanyName", "GitHub: nitrog0d"
             VALUE "FileDescription", "Architecture Spoofer for the new NVIDIA Game SDK"
             VALUE "FileVersion", "1.0.0.0"
-            VALUE "InternalName", "ArchSpoofer.dll"
-            VALUE "OriginalFilename", "ArchSpoofer.dll"
-            VALUE "ProductName", "ArchSpoofer"
+            VALUE "InternalName", "DLSSSpoofer.dll"
+            VALUE "OriginalFilename", "DLSSSpoofer.dll"
+            VALUE "ProductName", "DLSSSpoofer"
             VALUE "ProductVersion", "1.0.0.0"
         END
     END
